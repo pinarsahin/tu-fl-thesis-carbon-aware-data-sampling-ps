@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+[project]
+name = "fl-carbon-sampling"
+version = "0.1.0"
+requires-python = ">=3.9"
+description = "Carbon-aware data sampling in federated learning"
+license = {text = "MIT"}
+[tool.flwr.app]
+publisher = "pinarsahin"
+[tool.flwr.app.components]
+serverapp = "server_app:app"
+clientapp = "client_app:app"
+[tool.flwr.app.config]
+num-server-rounds = 100
+fraction-evaluate = 1
+learning-rate = 0.01
+local-epochs = 1
+batch-size = 32
+warmup-rounds = 0
+sampling-ratio = 1
+sampling-method = "equal_share"
+equal-share-count = 996
+alpha = 1.5
+m-min = 200
+aggregation = "fedavg"
+q-param = 0.01
+carbon-scenario = "skew_dirichlet"
+partition-method = "dirichlet"
+dirichlet-alpha = 0.1
+classes-per-partition = 8
+excluded-clients = "15,5,18,16,8,6,4"
+experiment-description = "Sabella-comparison v2: equal share (996 each) on 17-client kept set, matched to carbon-prop a1.5 total, no capping"
+
+
+#######################################################################
+# CONFIGURATION MIGRATION NOTICE:
+#
+# What was previously called "federation config" for SuperLink
+# connections in pyproject.toml has been renamed and moved.
+#
+# These settings are now **SuperLink connection configuration**
+# and are defined in the Flower configuration file.
+#
+# The entries below are commented out intentionally and are kept
+# only as a migration reference.
+#
+# Docs: https://flower.ai/docs/framework/ref-flower-configuration.html
+#######################################################################
+
+# [tool.flwr.federations]
+# default = "local-simulation"
+# [tool.flwr.federations.local-simulation]
+# options.num-supernodes = 24

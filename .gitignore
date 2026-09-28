@@ -1,0 +1,29 @@
+# Ignore everything by default
+*
+
+# Allow the core method
+!/task.py
+!/client_app.py
+!/server_app.py
+!/sampler.py
+!/pyproject.toml
+
+# Allow docs
+!/README.md
+!/.gitignore
+
+# Allow config files inside queue/ (the experiment variants)
+!/queue/
+!/queue/*.toml
+
+# Always ignore these even if a rule above tries to include their folder
+__pycache__/
+*.pyc
+venv/
+results/
+figures/
+*.log
+*.backup
+*.json
+!/carbon_intensities.py
+!/carbon_intensities_skew.py
